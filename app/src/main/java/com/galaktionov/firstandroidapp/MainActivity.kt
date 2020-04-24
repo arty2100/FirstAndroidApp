@@ -10,14 +10,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", "20-04-2020", true, 100, 34, 1823)
-
+        val post = Post(1L, "Netology", "My first post!", 1578666852, true, 100, 34, 1823)
+        date.text =lastSeen(post.created)
         mainText.text = post.content
-        date.text = post.created
         company.text = post.author
         setValues(post)
 
         manageLikeButton(post)
+
+    }
+
+    private fun lastSeen(created: Long): String {
+        val currentTime = System.currentTimeMillis()
+
 
     }
 

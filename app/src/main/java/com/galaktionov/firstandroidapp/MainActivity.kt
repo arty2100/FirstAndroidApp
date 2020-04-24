@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", 1587699392000, true, 100, 34, 1823)
+        val post = Post(1L, "Netology", "My first post!", 1587699392000, true, 100, 0, 1823)
         date.text = lastSeen(post.created)
         mainText.text = post.content
         company.text = post.author
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun lastSeen(created: Long): String  {
+    private fun lastSeen(created: Long): String {
         val instance = Calendar.getInstance()
         val currentDate =
             Date(instance.timeInMillis).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
@@ -40,11 +40,31 @@ class MainActivity : AppCompatActivity() {
         val minutesBetween = ChronoUnit.MINUTES.between(lastSeenDate, currentDate)
 
         return when {
-            yearsBetween > 0 -> resources.getQuantityString(R.plurals.plurals_years, yearsBetween.toInt(), yearsBetween)
-            monthsBetween > 0 -> resources.getQuantityString(R.plurals.plurals_months, monthsBetween.toInt(), monthsBetween)
-            daysBetween > 0 -> resources.getQuantityString(R.plurals.plurals_days, daysBetween.toInt(), daysBetween)
-            hoursBetween > 0 -> resources.getQuantityString(R.plurals.plurals_hours, hoursBetween.toInt(), hoursBetween)
-            minutesBetween > 0 -> resources.getQuantityString(R.plurals.plurals_minutes, minutesBetween.toInt(), minutesBetween)
+            yearsBetween > 0 -> resources.getQuantityString(
+                R.plurals.plurals_years,
+                yearsBetween.toInt(),
+                yearsBetween
+            )
+            monthsBetween > 0 -> resources.getQuantityString(
+                R.plurals.plurals_months,
+                monthsBetween.toInt(),
+                monthsBetween
+            )
+            daysBetween > 0 -> resources.getQuantityString(
+                R.plurals.plurals_days,
+                daysBetween.toInt(),
+                daysBetween
+            )
+            hoursBetween > 0 -> resources.getQuantityString(
+                R.plurals.plurals_hours,
+                hoursBetween.toInt(),
+                hoursBetween
+            )
+            minutesBetween > 0 -> resources.getQuantityString(
+                R.plurals.plurals_minutes,
+                minutesBetween.toInt(),
+                minutesBetween
+            )
             else -> getString(R.string.less_than_a_minute)
         }
 
@@ -62,31 +82,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun setValues(post: Post) {
         if (post.likes > 0) {
-            if (post.likes > 999) {
-                likeText.text = "999+"
-            } else {
-                likeText.text = post.likes.toString()
-            }
+            likeText.text = post.likes.toString()
         } else {
             likeText.text = ""
         }
 
         if (post.shares > 0) {
-            if (post.shares > 999) {
-                sharedText.text = "999+"
-            } else {
-                sharedText.text = post.shares.toString()
-            }
+
+            sharedText.text = post.shares.toString()
+
         } else {
             sharedText.text = ""
         }
 
         if (post.comments > 0) {
-            if (post.comments > 999) {
-                сommentText.text = "999+"
-            } else {
-                сommentText.text = post.comments.toString()
-            }
+
+            сommentText.text = post.comments.toString()
+
         } else {
             сommentText.text = ""
         }

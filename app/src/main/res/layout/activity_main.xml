@@ -84,11 +84,10 @@
                 android:id="@+id/sharedText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="999+">
+                tools:text="999">
 
             </TextView>
 
@@ -110,11 +109,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/large_start_end_margin"
-                android:ems="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/sharedIcon"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="999+">
+                tools:text="999">
 
             </TextView>
 
@@ -133,11 +131,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/large_start_end_margin"
-                android:ems="2"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/commentIcon"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="999+">
+                tools:text="999">
 
             </TextView>
 

@@ -10,12 +10,18 @@
 
     <style name="PostTheme" parent="AppTheme">
         <item name="android:fontFamily">@font/montserrat</item>
-
     </style>
 
     <style name="PostTheme.MainText">
         <item name="android:textSize">@dimen/post_text_size</item>
         <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="PostTheme.Date">
+        <item name="android:textSize">@dimen/post_date_size</item>
+        <item name="android:textColor">#999999</item>
+
+
     </style>
 
 </resources>

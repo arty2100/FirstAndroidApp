@@ -9,12 +9,12 @@
     </style>
 
     <style name="PostTheme" parent="AppTheme">
-        <item name="android:textSize">@dimen/post_text_size</item>
         <item name="android:fontFamily">@font/montserrat</item>
 
     </style>
 
     <style name="PostTheme.MainText">
+        <item name="android:textSize">@dimen/post_text_size</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 

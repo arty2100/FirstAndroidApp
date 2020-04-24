@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+    <string name="app_name">FirstAndroidApp</string>
+    <string name="less_than_a_minute">меньше минуты назад</string>
+
+    <plurals name="plurals_minutes">
+        <item quantity="one">%1$d минуту назад</item>
+        <item quantity="few">%1$d минуты назад</item>
+        <item quantity="many">%1$d минут назад</item>
+        <item quantity="other">%1$d минут назад</item>
+    </plurals>
+
+    <plurals name="plurals_hours">
+        <item quantity="one">%1$d час назад</item>
+        <item quantity="few">%1$d часа назад</item>
+        <item quantity="many">%1$d часов назад</item>
+        <item quantity="other">%1$d часов назад</item>
+    </plurals>
+    <plurals name="plurals_days">
+        <item quantity="one">%1$d день назад</item>
+        <item quantity="few">%1$d дня назад</item>
+        <item quantity="many">%1$d дней назад</item>
+        <item quantity="other">%1$d дней назад</item>
+    </plurals>
+    <plurals name="plurals_months">
+        <item quantity="one">%1$d месяц назад</item>
+        <item quantity="few">%1$d месяца назад</item>
+        <item quantity="many">%1$d месяцев назад</item>
+        <item quantity="other">%1$d месяцев назад</item>
+    </plurals>
+
+    <plurals name="plurals_years">
+        <item quantity="one">%1$d год назад</item>
+        <item quantity="few">%1$d года назад</item>
+        <item quantity="many">%1$d лет назад</item>
+        <item quantity="other">%1$d лет назад</item>
+    </plurals>
+
+
+</resources>

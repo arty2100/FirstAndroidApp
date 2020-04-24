@@ -4,14 +4,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.galaktionov.firstandroidapp.dto.Post
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.Year
+import java.time.YearMonth
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", 1578666852, true, 100, 34, 1823)
-        date.text =lastSeen(post.created)
+        val post = Post(1L, "Netology", "My first post!", 1585052512000, true, 100, 34, 1823)
+        date.text = lastSeen(post.created)
         mainText.text = post.content
         company.text = post.author
         setValues(post)
@@ -21,9 +26,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun lastSeen(created: Long): String {
-        val currentTime = System.currentTimeMillis()
+        val instance = Calendar.getInstance()
+        val currentDate =
+            Date(instance.timeInMillis).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+        val lastSeenDate =
+            Date(created).toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDateTime()
+        val yearsBetween = ChronoUnit.YEARS.between(Year.from(lastSeenDate), Year.from(currentDate))
+        val monthsBetween =
+            ChronoUnit.MONTHS.between(YearMonth.from(lastSeenDate), YearMonth.from(currentDate))
+        val daysBetween = ChronoUnit.DAYS.between(lastSeenDate, currentDate)
+        val hoursBetween = ChronoUnit.HOURS.between(lastSeenDate, currentDate)
+        val minutesBetween = ChronoUnit.MINUTES.between(lastSeenDate, currentDate)
 
-
+//        when {
+//            yearsBetween > 0 -> {
+//
+//                return getResponse(yearsBetween, TYPE.YEAR)
+//            }
+//            monthsBetween > 0 -> {
+//                return getResponse(monthsBetween, TYPE.MONTH)
+//            }
+//            daysBetween > 0 -> {
+//                return getResponse(daysBetween, TYPE.DAY)
+//            }
+//            hoursBetween > 0 -> {
+//                return getResponse(hoursBetween, TYPE.HOUR)
+//            }
+//            minutesBetween > 0 -> {
+//                return getResponse(minutesBetween, TYPE.MINUTE)
+//            }
+//            else -> {
+//                return "меньше минуты назад"
+//            }
+//        }
+        return ""
     }
 
     private fun manageLikeButton(post: Post) {

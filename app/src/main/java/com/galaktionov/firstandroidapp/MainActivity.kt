@@ -10,11 +10,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "artem", "My first post!", "20-04-2020", true, 100, 34, 1823)
+        val post = Post(1L, "Netology", "My first post!", "20-04-2020", true, 100, 34, 1823)
 
         mainText.text = post.content
         date.text = post.created
-
+        company.text = post.author
         setValues(post)
 
         manageLikeButton(post)

@@ -1,6 +1,8 @@
 package com.galaktionov.firstandroidapp
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.galaktionov.firstandroidapp.dto.Post
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,20 +17,45 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", 1587699392000, true, 100, 0, 1823)
-        date.text = lastSeen(post.created)
+        val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 100, 0, 1823)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            date.text = lastSeenApi26(post.created)
+
+        } else {
+            date.text = lastSeen(post.created)
+        }
+
         mainText.text = post.content
         company.text = post.author
         setValues(post)
-
         manageLikeButton(post)
 
     }
 
     private fun lastSeen(created: Long): String {
-        val instance = Calendar.getInstance()
+
+        val diff = System.currentTimeMillis() - created
+        val minutesBetween = diff / 1000 / 60
+        val hoursBetween = minutesBetween / 60
+        val daysBetween = hoursBetween / 24
+        val monthsBetween = daysBetween / 31
+        val yearsBetween = monthsBetween / 12
+
+        return lastSeenResult(
+            yearsBetween,
+            monthsBetween,
+            daysBetween,
+            hoursBetween,
+            minutesBetween
+        )
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun lastSeenApi26(created: Long): String {
+
         val currentDate =
-            Date(instance.timeInMillis).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+            Date(System.currentTimeMillis()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
         val lastSeenDate =
             Date(created).toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDateTime()
@@ -39,36 +66,51 @@ class MainActivity : AppCompatActivity() {
         val hoursBetween = ChronoUnit.HOURS.between(lastSeenDate, currentDate)
         val minutesBetween = ChronoUnit.MINUTES.between(lastSeenDate, currentDate)
 
-        return when {
-            yearsBetween > 0 -> resources.getQuantityString(
-                R.plurals.plurals_years,
-                yearsBetween.toInt(),
-                yearsBetween
-            )
-            monthsBetween > 0 -> resources.getQuantityString(
-                R.plurals.plurals_months,
-                monthsBetween.toInt(),
-                monthsBetween
-            )
-            daysBetween > 0 -> resources.getQuantityString(
-                R.plurals.plurals_days,
-                daysBetween.toInt(),
-                daysBetween
-            )
-            hoursBetween > 0 -> resources.getQuantityString(
-                R.plurals.plurals_hours,
-                hoursBetween.toInt(),
-                hoursBetween
-            )
-            minutesBetween > 0 -> resources.getQuantityString(
-                R.plurals.plurals_minutes,
-                minutesBetween.toInt(),
-                minutesBetween
-            )
-            else -> getString(R.string.less_than_a_minute)
-        }
+        return lastSeenResult(
+            yearsBetween,
+            monthsBetween,
+            daysBetween,
+            hoursBetween,
+            minutesBetween
+        )
 
     }
+
+    private fun lastSeenResult(
+        yearsBetween: Long,
+        monthsBetween: Long,
+        daysBetween: Long,
+        hoursBetween: Long,
+        minutesBetween: Long
+    ): String = when {
+        yearsBetween > 0 -> resources.getQuantityString(
+            R.plurals.plurals_years,
+            yearsBetween.toInt(),
+            yearsBetween
+        )
+        monthsBetween > 0 -> resources.getQuantityString(
+            R.plurals.plurals_months,
+            monthsBetween.toInt(),
+            monthsBetween
+        )
+        daysBetween > 0 -> resources.getQuantityString(
+            R.plurals.plurals_days,
+            daysBetween.toInt(),
+            daysBetween
+        )
+        hoursBetween > 0 -> resources.getQuantityString(
+            R.plurals.plurals_hours,
+            hoursBetween.toInt(),
+            hoursBetween
+        )
+        minutesBetween > 0 -> resources.getQuantityString(
+            R.plurals.plurals_minutes,
+            minutesBetween.toInt(),
+            minutesBetween
+        )
+        else -> getString(R.string.less_than_a_minute)
+    }
+
 
     private fun manageLikeButton(post: Post) {
         if (post.likedByMe) {

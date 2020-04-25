@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 100, 0, 1823)
+        val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 101, 0, 1823)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             date.text = lastSeenApi26(post.created)

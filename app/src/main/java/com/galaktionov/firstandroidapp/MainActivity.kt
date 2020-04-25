@@ -19,12 +19,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 101, 0, 1823)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            date.text = lastSeenApi26(post.created)
-
-        } else {
-            date.text = lastSeen(post.created)
-        }
+        date.text =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
+                post.created
+            )
 
         mainText.text = post.content
         company.text = post.author
@@ -55,7 +53,8 @@ class MainActivity : AppCompatActivity() {
     private fun lastSeenApi26(created: Long): String {
 
         val currentDate =
-            Date(System.currentTimeMillis()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()
+            Date(System.currentTimeMillis()).toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDateTime()
         val lastSeenDate =
             Date(created).toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDateTime()
@@ -113,6 +112,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun manageLikeButton(post: Post) {
+
         if (post.likedByMe) {
             likeIcon.setImageDrawable(getDrawable(R.drawable.ic_favorite_red_24dp))
             likeText.setTextColor(resources.getColor(R.color.colorAccent))
@@ -123,26 +123,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setValues(post: Post) {
-        if (post.likes > 0) {
-            likeText.text = post.likes.toString()
-        } else {
-            likeText.text = ""
-        }
 
-        if (post.shares > 0) {
-
-            sharedText.text = post.shares.toString()
-
-        } else {
-            sharedText.text = ""
-        }
-
-        if (post.comments > 0) {
-
-            сommentText.text = post.comments.toString()
-
-        } else {
-            сommentText.text = ""
-        }
+        likeText.text = if (post.likes > 0) post.likes.toString() else ""
+        sharedText.text = if (post.shares > 0) post.shares.toString() else ""
+        сommentText.text = if (post.comments > 0) post.comments.toString() else ""
     }
 }

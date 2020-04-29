@@ -1,9 +1,13 @@
 package com.galaktionov.firstandroidapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.galaktionov.firstandroidapp.dto.Location
 import com.galaktionov.firstandroidapp.dto.Post
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.Year
@@ -14,11 +18,24 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    infix fun Double.x(that: Double) = Location(this, that)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 2, 0, 1823)
-
+        //  val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 2, 0, 1823)
+        val post = Post(
+            1L,
+            "Netology",
+            "My first post!",
+            1587796778000,
+            true,
+            2,
+            0,
+            1823,
+            "Nevsky Prospect",
+            59.932030 x 30.355610
+        )
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
                 post.created
@@ -39,7 +56,26 @@ class MainActivity : AppCompatActivity() {
             }
             manageLikeButton(post)
         }
+        manageLocation(post)
 
+    }
+
+    private fun manageLocation(post: Post) {
+
+
+        if (post.location != null && post.address != null) {
+            addressView.text = post.address
+            locationLayout.setOnClickListener {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse("geo:${post.location.lat},${post.location.long}")
+                }
+                startActivity(intent)
+            }
+
+        } else {
+            locationLayout.visibility = View.GONE
+        }
     }
 
     private fun lastSeen(created: Long): String {

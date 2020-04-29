@@ -34,26 +34,63 @@
 
         <TextView
             android:id="@+id/date"
+            style="@style/PostTheme.Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/PostTheme.Date"
             app:layout_constraintStart_toEndOf="@+id/logoIcon"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="10-set-2020">
 
         </TextView>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/locationLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_top_bot_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainText">
+
+            <ImageView
+                android:id="@+id/locationIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_location_on_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/addressView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_start_end_margin"
+                android:ellipsize="end"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/locationIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="First post in our network!">
+
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <TextView
             android:id="@+id/company"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:ellipsize="end"
             android:gravity="center|start"
+            android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="@+id/logoIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/logoIcon"
             app:layout_constraintTop_toBottomOf="@+id/date"
-            android:ellipsize="end"
-            android:textColor="#000000"
             tools:text="Netology">
 
         </TextView>
@@ -73,11 +110,12 @@
         </TextView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_marginTop="@dimen/default_top_bot_margin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/default_top_bot_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mainText">
+            app:layout_constraintTop_toBottomOf="@+id/locationLayout">
 
 
             <TextView
@@ -124,7 +162,9 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_mode_comment_black_24dp"
                 app:layout_constraintEnd_toStartOf="@id/сommentText"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
 
             <TextView
                 android:id="@+id/likeText"
@@ -139,6 +179,7 @@
 
             </TextView>
 
+
             <ImageView
                 android:id="@+id/likeIcon"
                 android:layout_width="wrap_content"
@@ -147,7 +188,10 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_favorite_black_24dp"
                 app:layout_constraintEnd_toStartOf="@id/likeText"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

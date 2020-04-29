@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 101, 0, 1823)
+        val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 2, 0, 1823)
 
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
@@ -26,8 +26,19 @@ class MainActivity : AppCompatActivity() {
 
         mainText.text = post.content
         company.text = post.author
-        setValues(post)
+        sharedText.text = if (post.shares > 0) post.shares.toString() else ""
+        сommentText.text = if (post.comments > 0) post.comments.toString() else ""
         manageLikeButton(post)
+        likeIcon.setOnClickListener {
+            if (post.likedByMe) {
+                post.likes--
+                post.likedByMe = false
+            } else {
+                post.likes++
+                post.likedByMe = true
+            }
+            manageLikeButton(post)
+        }
 
     }
 
@@ -120,12 +131,7 @@ class MainActivity : AppCompatActivity() {
             likeIcon.setImageDrawable(getDrawable(R.drawable.ic_favorite_black_24dp))
             likeText.setTextColor(resources.getColor(android.R.color.black))
         }
-    }
-
-    private fun setValues(post: Post) {
-
         likeText.text = if (post.likes > 0) post.likes.toString() else ""
-        sharedText.text = if (post.shares > 0) post.shares.toString() else ""
-        сommentText.text = if (post.comments > 0) post.comments.toString() else ""
     }
+
 }

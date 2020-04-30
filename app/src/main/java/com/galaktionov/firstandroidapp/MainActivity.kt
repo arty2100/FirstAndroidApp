@@ -18,12 +18,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    infix fun Double.x(that: Double) = Location(this, that)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //  val post = Post(1L, "Netology", "My first post!", 1587796778000, true, 2, 0, 1823)
         val post = Post(
             1L,
             "Netology",
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             0,
             1823,
             "Nevsky Prospect",
-            59.932030 x 30.355610
+            Location(59.932030, 30.355610)
         )
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(

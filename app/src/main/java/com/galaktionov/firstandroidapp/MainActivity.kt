@@ -5,6 +5,9 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.galaktionov.firstandroidapp.dto.Post
@@ -16,6 +19,7 @@ import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 import java.util.*
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,14 +28,15 @@ class MainActivity : AppCompatActivity() {
         val post = Post(
             1L,
             "Netology",
-            "My first post!",
+            "Funny cats!",
             1587796778000,
             true,
             2,
             0,
             1823,
             "Nevsky Prospect",
-            59.932030 x 30.355610
+            59.932030 x 30.355610,
+            "-bvXmLR3Ozc"
         )
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
@@ -53,6 +58,26 @@ class MainActivity : AppCompatActivity() {
             manageLikeButton(post)
         }
         manageLocation(post)
+        manageVideo(post)
+    }
+
+    private fun manageVideo(post: Post) {
+
+        if (post.videoId != null) {
+            webView.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                    return false
+                }
+            }
+            val webSettings: WebSettings = webView.settings
+            webSettings.javaScriptEnabled = true
+            webSettings.loadWithOverviewMode = true
+            webSettings.useWideViewPort = true
+
+            webView.loadUrl("https://www.youtube.com/embed/${post.videoId}")
+        } else {
+            webView.visibility = View.GONE
+        }
 
     }
 

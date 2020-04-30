@@ -9,10 +9,9 @@ data class Post(
     var likes: Int = 0,
     var comments: Int = 0,
     var shares: Int = 0,
-    val address: String?,
-    val location: Location?
-
-
+    val address: String? = null,
+    val location: Location? = null,
+    val videoId: String? = null
 )
 
 

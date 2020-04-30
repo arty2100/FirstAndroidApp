@@ -43,12 +43,12 @@ class MainActivity : AppCompatActivity() {
         сommentText.text = if (post.comments > 0) post.comments.toString() else ""
         manageLikeButton(post)
         likeIcon.setOnClickListener {
-            if (post.likedByMe) {
+            post.likedByMe = if (post.likedByMe) {
                 post.likes--
-                post.likedByMe = false
+                false
             } else {
                 post.likes++
-                post.likedByMe = true
+                true
             }
             manageLikeButton(post)
         }

@@ -63,11 +63,10 @@ class MainActivity : AppCompatActivity() {
         if (post.location != null && post.address != null) {
             addressView.text = post.address
             locationLayout.setOnClickListener {
-                val intent = Intent().apply {
+                startActivity(Intent().apply {
                     action = Intent.ACTION_VIEW
                     data = Uri.parse("geo:${post.location.lat},${post.location.long}")
-                }
-                startActivity(intent)
+                })
             }
 
         } else {

@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.galaktionov.firstandroidapp.dto.Location
 import com.galaktionov.firstandroidapp.dto.Post
+import com.galaktionov.firstandroidapp.extensions.x
 import kotlinx.android.synthetic.main.activity_main.*
 import java.time.Year
 import java.time.YearMonth
@@ -31,13 +31,12 @@ class MainActivity : AppCompatActivity() {
             0,
             1823,
             "Nevsky Prospect",
-            Location(59.932030, 30.355610)
+            59.932030 x 30.355610
         )
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
                 post.created
             )
-
         mainText.text = post.content
         company.text = post.author
         sharedText.text = if (post.shares > 0) post.shares.toString() else ""

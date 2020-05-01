@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             1823,
             "Nevsky Prospect",
             59.932030 x 30.355610,
-            "-bvXmLR3Ozc"
+            "Lq8bpo9KWa8"
         )
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
@@ -89,7 +89,8 @@ class MainActivity : AppCompatActivity() {
             locationLayout.setOnClickListener {
                 startActivity(Intent().apply {
                     action = Intent.ACTION_VIEW
-                    data = Uri.parse("geo:${post.location.lat},${post.location.long}")
+                    data = Uri.parse("https://maps.google.com/?q=${post.location.lat},${post.location.long}")
+
                 })
             }
 

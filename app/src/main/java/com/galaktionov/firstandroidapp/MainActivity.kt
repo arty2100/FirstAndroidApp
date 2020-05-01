@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             2,
             0,
             1823,
-            "Nevsky Prospect",
+            "Nevsky Prospect, 1",
             59.932030 x 30.355610,
             "Lq8bpo9KWa8"
         )

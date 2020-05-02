@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             1823,
             "Nevsky Prospect, 1",
             59.932030 x 30.355610,
-            "Lq8bpo9KWa8"
+            "Lq8bpo9KWa8",
+            Post.POST_TYPE.VIDEO
         )
         date.text =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(post.created) else lastSeen(
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun manageVideo(post: Post) {
 
-        if (post.videoId != null) {
+        if (post.videoId != null && Post.POST_TYPE.VIDEO == post.postTpe) {
             webView.webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                     return false

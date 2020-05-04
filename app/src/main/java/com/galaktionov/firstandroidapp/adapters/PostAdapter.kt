@@ -208,7 +208,7 @@ class PostAdapter(
     private fun removeFromList(position: Int) {
         items.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemRangeChanged(position, items.size);
+        notifyItemRangeChanged(position, items.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {

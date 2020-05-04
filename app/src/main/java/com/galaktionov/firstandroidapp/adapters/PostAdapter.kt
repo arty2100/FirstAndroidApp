@@ -147,7 +147,7 @@ class PostAdapter(
 
         private fun manageVideo(post: Post) {
 
-            if (post.videoId != null) {
+            if (Post.POST_TYPE.VIDEO == post.postTpe && post.videoId != null) {
                 webView.webViewClient = object : WebViewClient() {
                     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                         return false

@@ -23,14 +23,12 @@ class MainActivity : AppCompatActivity() {
                 2,
                 0,
                 1823,
-                null,
-                null,
-                null, Post.POST_TYPE.TEXT
+                videoId = "-bvXmLR3Ozc", postTpe = Post.POST_TYPE.VIDEO
             ),
             Post(
                 1L,
                 "Google",
-                "Funny cats!",
+                "Фестиваль книги",
                 1587711778000,
                 false,
                 20,
@@ -38,85 +36,41 @@ class MainActivity : AppCompatActivity() {
                 300,
                 "Nevsky Prospect",
                 59.932030 x 30.355610,
-                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
+                postTpe = Post.POST_TYPE.EVENT
             ),
             Post(
                 1L,
                 "Microsoft",
-                "Funny cats!",
+                "Microsoft post",
                 1587796778000,
-                true,
-                25,
-                189,
-                1,
-                "Nevsky Prospect",
-                59.932030 x 30.355610,
-                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
+                false,
+                250,
+                10,
+                111, postTpe = Post.POST_TYPE.REPLY
             ),
             Post(
                 1L,
-                "Microsoft",
-                "Funny cats!",
+                "Twitter",
+                "Twitter post",
                 1523496778000,
                 true,
-                25,
-                189,
+                5,
                 1,
-                "Nevsky Prospect",
-                59.932030 x 30.355610,
-                "-bvXmLR3Ozc", Post.POST_TYPE.TEXT
+                0,
+                 postTpe =  Post.POST_TYPE.TEXT
             ),
             Post(
                 1L,
-                "Aeroflot",
-                "Funny cats!",
+                "Facebook",
+                "Facebook post",
                 1587567778000,
-                true,
-                25,
-                189,
-                1,
+                false,
+                16,
+                12,
+                3,
                 null,
                 null,
-                null, Post.POST_TYPE.TEXT
-            ),
-            Post(
-                1L,
-                "Microsoft",
-                "Funny cats!",
-                1587796111000,
-                true,
-                25,
-                189,
-                1,
-                null,
-                null,
-                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
-            ),
-            Post(
-                1L,
-                "Microsoft",
-                "Funny cats!",
-                1581234778000,
-                true,
-                25,
-                189,
-                1,
-                "Nevsky Prospect",
-                59.932030 x 30.355610,
-                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
-            ),
-            Post(
-                1L,
-                "Microsoft",
-                "Funny cats!",
-                1587123478000,
-                true,
-                25,
-                189,
-                1,
-                null,
-                null,
-                null, Post.POST_TYPE.TEXT
+                videoId = "-bvXmLR3Ozc", postTpe = Post.POST_TYPE.VIDEO
             )
         )
 

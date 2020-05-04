@@ -15,7 +15,7 @@ data class Post(
     val postTpe: POST_TYPE
 ) {
     enum class POST_TYPE {
-        VIDEO, TEXT
+        VIDEO, TEXT,REPLY,EVENT,ADDS
     }
 }
 

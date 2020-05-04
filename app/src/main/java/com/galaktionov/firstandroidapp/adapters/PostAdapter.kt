@@ -180,7 +180,7 @@ class PostAdapter(
 
         private fun manageLocation(post: Post) {
 
-            if (post.location != null && post.address != null) {
+            if (Post.POST_TYPE.EVENT== post.postTpe && post.location != null && post.address != null) {
                 addressView.text = post.address
                 locationLayout.setOnClickListener {
                     val intent = Intent().apply {

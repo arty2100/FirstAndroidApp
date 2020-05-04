@@ -34,6 +34,7 @@ class PostAdapter(
         val mainText = view.mainText
         val company = view.company
         val addressView = view.addressView
+        val locationIcon = view.locationIcon
         val locationLayout = view.addressView
         val date = view.date
 
@@ -190,7 +191,8 @@ class PostAdapter(
                 }
 
             } else {
-                locationLayout.visibility = View.GONE
+                locationIcon.visibility = View.GONE
+                addressView.visibility = View.GONE
             }
         }
     }

@@ -18,27 +18,27 @@ class MainActivity : AppCompatActivity() {
                 1L,
                 "Netology",
                 "Funny cats!",
-                1587796778000,
+                1597796778000,
                 true,
                 2,
                 0,
                 1823,
-                "Nevsky Prospect",
-                59.932030 x 30.355610,
-                "-bvXmLR3Ozc"
+                null,
+                null,
+                null, Post.POST_TYPE.TEXT
             ),
             Post(
                 1L,
                 "Google",
                 "Funny cats!",
-                1587796778000,
+                1587711778000,
                 false,
                 20,
                 100,
                 300,
                 "Nevsky Prospect",
                 59.932030 x 30.355610,
-                "-bvXmLR3Ozc"
+                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
             ),
             Post(
                 1L,
@@ -51,7 +51,72 @@ class MainActivity : AppCompatActivity() {
                 1,
                 "Nevsky Prospect",
                 59.932030 x 30.355610,
-                "-bvXmLR3Ozc"
+                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
+            ),
+            Post(
+                1L,
+                "Microsoft",
+                "Funny cats!",
+                1523496778000,
+                true,
+                25,
+                189,
+                1,
+                "Nevsky Prospect",
+                59.932030 x 30.355610,
+                "-bvXmLR3Ozc", Post.POST_TYPE.TEXT
+            ),
+            Post(
+                1L,
+                "Aeroflot",
+                "Funny cats!",
+                1587567778000,
+                true,
+                25,
+                189,
+                1,
+                null,
+                null,
+                null, Post.POST_TYPE.TEXT
+            ),
+            Post(
+                1L,
+                "Microsoft",
+                "Funny cats!",
+                1587796111000,
+                true,
+                25,
+                189,
+                1,
+                null,
+                null,
+                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
+            ),
+            Post(
+                1L,
+                "Microsoft",
+                "Funny cats!",
+                1581234778000,
+                true,
+                25,
+                189,
+                1,
+                "Nevsky Prospect",
+                59.932030 x 30.355610,
+                "-bvXmLR3Ozc", Post.POST_TYPE.VIDEO
+            ),
+            Post(
+                1L,
+                "Microsoft",
+                "Funny cats!",
+                1587123478000,
+                true,
+                25,
+                189,
+                1,
+                null,
+                null,
+                null, Post.POST_TYPE.TEXT
             )
         )
 

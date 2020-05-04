@@ -37,8 +37,13 @@ class PostAdapter(
         val locationIcon = view.locationIcon
         val locationLayout = view.addressView
         val date = view.date
+        val notInterested = view.notInterested
 
-        fun bind(post: Post) {
+        fun bind(
+            post: Post,
+            position: Int,
+            postAdapter: PostAdapter
+        ) {
 
             with(post) {
                 date.text =
@@ -62,6 +67,9 @@ class PostAdapter(
                 }
                 manageLocation(this)
                 manageVideo(this)
+                notInterested.setOnClickListener {
+                    postAdapter.removeFromList(position)
+                }
             }
         }
 
@@ -180,7 +188,7 @@ class PostAdapter(
 
         private fun manageLocation(post: Post) {
 
-            if (Post.POST_TYPE.EVENT== post.postTpe && post.location != null && post.address != null) {
+            if (Post.POST_TYPE.EVENT == post.postTpe && post.location != null && post.address != null) {
                 addressView.text = post.address
                 locationLayout.setOnClickListener {
                     val intent = Intent().apply {
@@ -197,6 +205,12 @@ class PostAdapter(
         }
     }
 
+    private fun removeFromList(position: Int) {
+        items.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, items.size);
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(parent.inflate(R.layout.post_detail, false))
     }
@@ -205,9 +219,9 @@ class PostAdapter(
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
-        holder.bind(items[position])
-    }
+        holder.bind(items[position], position, this)
 
+    }
 
 }
 

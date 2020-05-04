@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 5,
                 1,
                 0,
-                 postTpe =  Post.POST_TYPE.TEXT
+                postTpe = Post.POST_TYPE.TEXT
             ),
             Post(
                 1L,
@@ -73,8 +73,6 @@ class MainActivity : AppCompatActivity() {
                 videoId = "-bvXmLR3Ozc", postTpe = Post.POST_TYPE.VIDEO
             )
         )
-
         items.adapter = PostAdapter(list)
-
     }
 }

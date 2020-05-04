@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/items"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
         android:nestedScrollingEnabled="true"
         android:scrollbarSize="1dp"
@@ -17,8 +17,6 @@
         android:scrollbars="vertical"
         android:scrollingCache="true"
         android:smoothScrollbar="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

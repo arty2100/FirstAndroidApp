@@ -44,6 +44,19 @@
 
         </TextView>
 
+
+        <TextView
+            android:id="@+id/notInterested"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_interested"
+            android:textColor="@color/infoColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/locationLayout"
             android:layout_width="0dp"
@@ -85,11 +98,13 @@
             android:id="@+id/company"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginRight="@dimen/default_start_end_margin"
             android:ellipsize="end"
             android:gravity="center|start"
+            android:maxLines="1"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="@+id/logoIcon"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
             app:layout_constraintStart_toEndOf="@+id/logoIcon"
             app:layout_constraintTop_toBottomOf="@+id/date"
             tools:text="Netology">

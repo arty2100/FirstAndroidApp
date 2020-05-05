@@ -5,6 +5,7 @@
     <string name="app_name">FirstAndroidApp</string>
     <string name="less_than_a_minute">меньше минуты назад</string>
     <string name="not_interested">не интересно</string>
+    <string name="adv">Рекламный пост</string>
 
     <plurals name="plurals_minutes">
         <item quantity="one">%1$d минуту назад</item>

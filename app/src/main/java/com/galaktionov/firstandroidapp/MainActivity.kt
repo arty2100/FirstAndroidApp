@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 5,
                 1,
                 0,
-                postTpe = Post.POST_TYPE.TEXT
+                postTpe = Post.POST_TYPE.ADV
             ),
             Post(
                 1L,

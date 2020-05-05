@@ -2,6 +2,7 @@
     <string name="app_name">FirstAndroidApp</string>
     <string name="less_than_a_minute">Less than a minute ago</string>
     <string name="not_interested">Not interested</string>
+    <string name="adv">Promotional post</string>
 
 
     <plurals name="plurals_minutes">

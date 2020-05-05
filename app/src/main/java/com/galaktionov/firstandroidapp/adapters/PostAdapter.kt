@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -22,7 +23,50 @@ import java.util.*
 
 class PostAdapter(
     val items: MutableList<Post>
-) : RecyclerView.Adapter<PostAdapter.Holder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    private val TYPE_ADV = 1
+    private val TYPE_OTHER = 0
+
+    class AdvHolder(val view: View) : RecyclerView.ViewHolder(view) {
+        val likeIcon = view.likeIcon
+        val likeText = view.likeText
+        val commentText = view.commentText
+        val sharedText = view.sharedText
+        val mainText = view.mainText
+        val company = view.company
+        val notInterested = view.notInterested
+        fun bind(
+            post: Post,
+            position: Int,
+            postAdapter: PostAdapter
+        ) {
+
+            with(post) {
+                mainText.text = content
+                company.text = author
+                sharedText.text = if (shares > 0) shares.toString() else ""
+                commentText.text = if (comments > 0) comments.toString() else ""
+                // manageLikeButton(this)
+                likeIcon.setOnClickListener {
+                    likedByMe = if (likedByMe) {
+                        likes--
+                        false
+                    } else {
+                        likes++
+                        true
+                    }
+                    // manageLikeButton(this)
+                }
+                //manageLocation(this)
+                // manageVideo(this)
+                notInterested.setOnClickListener {
+                    postAdapter.removeFromList(position)
+                }
+            }
+        }
+    }
+
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view) {
 
@@ -183,6 +227,10 @@ class PostAdapter(
                 likeIcon.setImageDrawable(view.context.getDrawable(R.drawable.ic_favorite_black_24dp))
                 likeText.setTextColor(view.context.resources.getColor(android.R.color.black))
             }
+
+            val anim = AnimationUtils.loadAnimation(view.context, R.anim.scale)
+            likeIcon.startAnimation(anim);
+
             likeText.text = if (post.likes > 0) post.likes.toString() else ""
         }
 
@@ -211,18 +259,29 @@ class PostAdapter(
         notifyItemRangeChanged(position, items.size)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(parent.inflate(R.layout.post_detail, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        return if (TYPE_ADV != viewType) Holder(parent.inflate(R.layout.post_detail, false))
+        else AdvHolder(parent.inflate(R.layout.post_detail_adv, false))
+
+
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-
-        holder.bind(items[position], position, this)
-
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (TYPE_ADV != getItemViewType(position)) (holder as Holder).bind(
+            items[position],
+            position,
+            this
+        )
+        else (holder as AdvHolder).bind(items[position], position, this)
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if (Post.POST_TYPE.ADV == items[position].postTpe) TYPE_ADV else TYPE_OTHER
+
+    }
 }
 
 

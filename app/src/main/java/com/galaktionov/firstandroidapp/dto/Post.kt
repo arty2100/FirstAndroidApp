@@ -12,10 +12,11 @@ data class Post(
     val address: String? = null,
     val location: Location? = null,
     val videoId: String? = null,
-    val postTpe: POST_TYPE
+    val postTpe: POST_TYPE,
+    val advLink: String? = null
 ) {
     enum class POST_TYPE {
-        VIDEO, TEXT,REPLY,EVENT,ADV
+        VIDEO, TEXT, REPLY, EVENT, ADV
     }
 }
 

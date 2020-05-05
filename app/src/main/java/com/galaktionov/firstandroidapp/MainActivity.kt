@@ -50,14 +50,14 @@ class MainActivity : AppCompatActivity() {
             ),
             Post(
                 1L,
-                "Twitter",
-                "Twitter post",
+                "Goolge",
+                "Use the best search engine!",
                 1523496778000,
                 true,
                 5,
                 1,
                 0,
-                postTpe = Post.POST_TYPE.ADV
+                postTpe = Post.POST_TYPE.ADV, advLink = "www.google.com"
             ),
             Post(
                 1L,

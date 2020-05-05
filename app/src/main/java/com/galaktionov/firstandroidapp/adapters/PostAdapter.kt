@@ -31,7 +31,7 @@ class PostAdapter(
     private val TYPE_ADV = 1
     private val TYPE_OTHER = 0
 
-    class AdvHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    open class GenericAdapter(val view: View) : RecyclerView.ViewHolder(view) {
         val likeIcon = view.likeIcon
         val likeText = view.likeText
         val commentText = view.commentText
@@ -40,75 +40,26 @@ class PostAdapter(
         val company = view.company
         val companyLogo = view.logoIcon
         val notInterested = view.notInterested
-        fun bind(
-            post: Post,
-            position: Int,
-            postAdapter: PostAdapter
-        ) {
-
-            with(post) {
-                mainText.text = content
-                company.text = author
-                sharedText.text = if (shares > 0) shares.toString() else ""
-                commentText.text = if (comments > 0) comments.toString() else ""
-                // manageLikeButton(this)
-                likeIcon.setOnClickListener {
-                    likedByMe = if (likedByMe) {
-                        likes--
-                        false
-                    } else {
-                        likes++
-                        true
-                    }
-                    // manageLikeButton(this)
-                }
-                //manageLocation(this)
-                // manageVideo(this)
-                notInterested.setOnClickListener {
-                    postAdapter.removeFromList(position)
-                }
-
-                Glide.with(view.context).load(companyImg ?: R.drawable.ic_android_48dp)
-                    .transform(FitCenter(), RoundedCorners(10))
-                    .into(companyLogo)
-
-
-            }
-        }
-    }
-
-
-    class Holder(val view: View) : RecyclerView.ViewHolder(view) {
-
         val webView = view.webView
-        val likeIcon = view.likeIcon
-        val likeText = view.likeText
-        val commentText = view.commentText
-        val sharedText = view.sharedText
-        val mainText = view.mainText
-        val company = view.company
         val addressView = view.addressView
         val locationIcon = view.locationIcon
         val locationLayout = view.addressView
         val date = view.date
-        val notInterested = view.notInterested
 
-        fun bind(
+        fun genericBind(
             post: Post,
             position: Int,
             postAdapter: PostAdapter
         ) {
-
             with(post) {
-                date.text =
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(created) else lastSeen(
-                        created
-                    )
                 mainText.text = content
                 company.text = author
                 sharedText.text = if (shares > 0) shares.toString() else ""
                 commentText.text = if (comments > 0) comments.toString() else ""
                 manageLikeButton(this)
+                notInterested.setOnClickListener {
+                    postAdapter.removeFromList(position)
+                }
                 likeIcon.setOnClickListener {
                     likedByMe = if (likedByMe) {
                         likes--
@@ -119,16 +70,13 @@ class PostAdapter(
                     }
                     manageLikeButton(this)
                 }
-                manageLocation(this)
-                manageVideo(this)
-                notInterested.setOnClickListener {
-                    postAdapter.removeFromList(position)
-                }
+                Glide.with(view.context).load(companyImg ?: R.drawable.ic_android_48dp)
+                    .transform(FitCenter(), RoundedCorners(10))
+                    .into(companyLogo)
             }
         }
 
-
-        private fun lastSeen(created: Long): String {
+        fun lastSeen(created: Long): String {
 
             val diff = System.currentTimeMillis() - created
             val minutesBetween = diff / 1000 / 60
@@ -147,7 +95,7 @@ class PostAdapter(
         }
 
         @RequiresApi(Build.VERSION_CODES.O)
-        private fun lastSeenApi26(created: Long): String {
+        fun lastSeenApi26(created: Long): String {
 
             val currentDate =
                 Date(System.currentTimeMillis()).toInstant().atZone(ZoneId.systemDefault())
@@ -173,7 +121,7 @@ class PostAdapter(
 
         }
 
-        private fun lastSeenResult(
+        fun lastSeenResult(
             yearsBetween: Long,
             monthsBetween: Long,
             daysBetween: Long,
@@ -208,7 +156,7 @@ class PostAdapter(
             else -> view.context.getString(R.string.less_than_a_minute)
         }
 
-        private fun manageVideo(post: Post) {
+        fun manageVideo(post: Post) {
 
             if (Post.POST_TYPE.VIDEO == post.postTpe && post.videoId != null) {
                 webView.webViewClient = object : WebViewClient() {
@@ -228,7 +176,7 @@ class PostAdapter(
 
         }
 
-        private fun manageLikeButton(post: Post) {
+        fun manageLikeButton(post: Post) {
 
             if (post.likedByMe) {
                 likeIcon.setImageDrawable(view.context.getDrawable(R.drawable.ic_favorite_red_24dp))
@@ -244,7 +192,7 @@ class PostAdapter(
             likeText.text = if (post.likes > 0) post.likes.toString() else ""
         }
 
-        private fun manageLocation(post: Post) {
+        fun manageLocation(post: Post) {
 
             if (Post.POST_TYPE.EVENT == post.postTpe && post.location != null && post.address != null) {
                 addressView.text = post.address
@@ -261,6 +209,39 @@ class PostAdapter(
                 addressView.visibility = View.GONE
             }
         }
+    }
+
+    class AdvHolder(view: View) : GenericAdapter(view) {
+
+        fun bind(
+            post: Post,
+            position: Int,
+            postAdapter: PostAdapter
+        ) {
+            super.genericBind(post, position, postAdapter)
+        }
+    }
+
+
+    class Holder(view: View) : GenericAdapter(view) {
+        fun bind(
+            post: Post,
+            position: Int,
+            postAdapter: PostAdapter
+        ) {
+            super.genericBind(post, position, postAdapter)
+            with(post) {
+                date.text =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(created) else lastSeen(
+                        created
+                    )
+                manageLocation(this)
+                manageVideo(this)
+
+            }
+        }
+
+
     }
 
     private fun removeFromList(position: Int) {

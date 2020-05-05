@@ -168,7 +168,7 @@ class PostAdapter(
 
         fun manageVideo(post: Post) {
 
-            if (Post.POST_TYPE.VIDEO == post.postTpe && post.videoId != null) {
+            if (Post.POST_TYPE.VIDEO == post.postTpe && post.videoUrl != null) {
                 webView.webViewClient = object : WebViewClient() {
                     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                         return false
@@ -179,7 +179,7 @@ class PostAdapter(
                 webSettings.loadWithOverviewMode = true
                 webSettings.useWideViewPort = true
 
-                webView.loadUrl("https://www.youtube.com/embed/${post.videoId}")
+                webView.loadUrl(post.videoUrl)
             } else {
                 webView.visibility = View.GONE
             }

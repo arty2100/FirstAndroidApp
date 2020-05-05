@@ -13,7 +13,7 @@ data class Post(
     var shares: Int = 0,
     val address: String? = null,
     val location: Location? = null,
-    val videoId: String? = null,
+    val videoUrl: String? = null,
     val postTpe: POST_TYPE,
     val advLink: Uri? = null,
     val companyImg : Uri? = null

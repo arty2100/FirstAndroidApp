@@ -36,9 +36,9 @@
             style="@style/PostTheme.adv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/logoIcon"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/adv">
+            android:text="@string/adv"
+            app:layout_constraintBottom_toBottomOf="@+id/logoIcon"
+            app:layout_constraintStart_toEndOf="@+id/logoIcon">
 
         </TextView>
 
@@ -55,9 +55,6 @@
         </TextView>
 
 
-
-
-
         <TextView
             android:id="@+id/company"
             android:layout_width="0dp"
@@ -67,10 +64,10 @@
             android:gravity="center|start"
             android:maxLines="1"
             android:textColor="#000000"
-            app:layout_constraintBottom_toBottomOf="@+id/logoIcon"
+            app:layout_constraintBottom_toTopOf="@+id/title"
             app:layout_constraintEnd_toStartOf="@+id/notInterested"
             app:layout_constraintStart_toEndOf="@+id/logoIcon"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Netology">
 
         </TextView>
@@ -84,7 +81,7 @@
             android:layout_marginTop="@dimen/default_top_bot_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/company"
+            app:layout_constraintTop_toBottomOf="@+id/logoIcon"
             tools:text="First post in our network!">
 
         </TextView>

@@ -5,5 +5,7 @@
     <color name="colorAccent">#F44336</color>
     <color name="infoColor">#03A9F4</color>
     <color name="advColor">#FF5722</color>
+    <color name="mediumGrey">#dcdcdc</color>
+
 
 </resources>

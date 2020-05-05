@@ -7,6 +7,6 @@
     <dimen name="default_top_bot_margin">16dp</dimen>
     <dimen name="post_date_size">10sp</dimen>
     <dimen name="post_adv_size">12sp</dimen>
-
+    <dimen name="rec_divider">1dp</dimen>
 
 </resources>

@@ -1,5 +1,7 @@
 package com.galaktionov.firstandroidapp.dto
 
+import android.net.Uri
+
 data class Post(
     val id: Long,
     val author: String,
@@ -13,7 +15,8 @@ data class Post(
     val location: Location? = null,
     val videoId: String? = null,
     val postTpe: POST_TYPE,
-    val advLink: String? = null
+    val advLink: String? = null,
+    val companyImg : Uri? = null
 ) {
     enum class POST_TYPE {
         VIDEO, TEXT, REPLY, EVENT, ADV

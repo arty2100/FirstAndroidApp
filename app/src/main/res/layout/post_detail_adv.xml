@@ -22,8 +22,8 @@
 
         <ImageView
             android:id="@+id/logoIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_android_48dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +36,8 @@
             style="@style/PostTheme.adv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_start_end_margin"
+
             android:text="@string/adv"
             app:layout_constraintBottom_toBottomOf="@+id/logoIcon"
             app:layout_constraintStart_toEndOf="@+id/logoIcon">
@@ -45,6 +47,7 @@
 
         <TextView
             android:id="@+id/notInterested"
+            style="@style/PostTheme.Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/not_interested"
@@ -59,7 +62,8 @@
             android:id="@+id/company"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginRight="@dimen/default_start_end_margin"
+            android:layout_marginStart="@dimen/default_start_end_margin"
+            android:layout_marginEnd="@dimen/default_start_end_margin"
             android:ellipsize="end"
             android:gravity="center|start"
             android:maxLines="1"
@@ -77,8 +81,8 @@
             style="@style/PostTheme.MainText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
             android:layout_marginTop="@dimen/default_top_bot_margin"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logoIcon"

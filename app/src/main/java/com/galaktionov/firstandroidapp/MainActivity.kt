@@ -1,5 +1,6 @@
 package com.galaktionov.firstandroidapp
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.galaktionov.firstandroidapp.adapters.PostAdapter
@@ -57,7 +58,9 @@ class MainActivity : AppCompatActivity() {
                 5,
                 1,
                 0,
-                postTpe = Post.POST_TYPE.ADV, advLink = "www.google.com"
+                postTpe = Post.POST_TYPE.ADV,
+                advLink = "www.google.com",
+                companyImg = Uri.parse("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png")
             ),
             Post(
                 1L,

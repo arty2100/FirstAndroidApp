@@ -11,6 +11,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.galaktionov.firstandroidapp.R
 import com.galaktionov.firstandroidapp.dto.Post
 import com.galaktionov.firstandroidapp.extensions.inflate
@@ -35,6 +38,7 @@ class PostAdapter(
         val sharedText = view.sharedText
         val mainText = view.mainText
         val company = view.company
+        val companyLogo = view.logoIcon
         val notInterested = view.notInterested
         fun bind(
             post: Post,
@@ -63,6 +67,12 @@ class PostAdapter(
                 notInterested.setOnClickListener {
                     postAdapter.removeFromList(position)
                 }
+
+                Glide.with(view.context).load(companyImg ?: R.drawable.ic_android_48dp)
+                    .transform(FitCenter(), RoundedCorners(10))
+                    .into(companyLogo)
+
+
             }
         }
     }

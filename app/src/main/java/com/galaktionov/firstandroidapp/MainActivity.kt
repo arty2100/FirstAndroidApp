@@ -37,17 +37,17 @@ class MainActivity : AppCompatActivity() {
                 300,
                 "Nevsky Prospect",
                 59.932030 x 30.355610,
-                postTpe = Post.POST_TYPE.EVENT
+                postTpe = Post.POST_TYPE.EVENT, companyImg = Uri.parse("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png")
             ),
             Post(
                 1L,
-                "Microsoft",
-                "Microsoft post",
+                "Twitter",
+                "Twitter post",
                 1587796778000,
                 false,
                 250,
                 10,
-                111, postTpe = Post.POST_TYPE.REPLY
+                111, postTpe = Post.POST_TYPE.REPLY, companyImg = Uri.parse("https://upload.wikimedia.org/wikipedia/it/0/09/Twitter_bird_logo.png")
             ),
             Post(
                 1L,
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                 3,
                 null,
                 null,
-                videoId = "-bvXmLR3Ozc", postTpe = Post.POST_TYPE.VIDEO
+                videoId = "-bvXmLR3Ozc", postTpe = Post.POST_TYPE.VIDEO, companyImg = Uri.parse("https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512")
             )
         )
         items.adapter = PostAdapter(list)

@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 1,
                 0,
                 postTpe = Post.POST_TYPE.ADV,
-                advLink = "www.google.com",
+                advLink = Uri.parse("http://www.google.com"),
                 companyImg = Uri.parse("https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png")
             ),
             Post(

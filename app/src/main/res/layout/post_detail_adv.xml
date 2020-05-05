@@ -90,15 +90,15 @@
         </TextView>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/seeMoreButton"
             style="@style/PostTheme.adv.Button"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="@dimen/default_top_bot_margin"
             android:background="@drawable/rounded_button"
             android:gravity="end|center"
-            android:paddingEnd="@dimen/default_start_end_margin"
             android:text="More"
+            android:drawableEnd="@drawable/ic_chevron_right_white_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mainText">
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_top_bot_margin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button">
+            app:layout_constraintTop_toBottomOf="@+id/seeMoreButton">
 
 
             <TextView

@@ -18,6 +18,15 @@ import com.galaktionov.firstandroidapp.R
 import com.galaktionov.firstandroidapp.dto.Post
 import com.galaktionov.firstandroidapp.extensions.inflate
 import kotlinx.android.synthetic.main.post_detail.view.*
+import kotlinx.android.synthetic.main.post_detail.view.commentText
+import kotlinx.android.synthetic.main.post_detail.view.company
+import kotlinx.android.synthetic.main.post_detail.view.likeIcon
+import kotlinx.android.synthetic.main.post_detail.view.likeText
+import kotlinx.android.synthetic.main.post_detail.view.logoIcon
+import kotlinx.android.synthetic.main.post_detail.view.mainText
+import kotlinx.android.synthetic.main.post_detail.view.notInterested
+import kotlinx.android.synthetic.main.post_detail.view.sharedText
+import kotlinx.android.synthetic.main.post_detail_adv.view.*
 import java.time.Year
 import java.time.YearMonth
 import java.time.ZoneId
@@ -45,6 +54,7 @@ class PostAdapter(
         val locationIcon = view.locationIcon
         val locationLayout = view.addressView
         val date = view.date
+        val seeMoreBotton = view.seeMoreButton
 
         fun genericBind(
             post: Post,
@@ -197,11 +207,10 @@ class PostAdapter(
             if (Post.POST_TYPE.EVENT == post.postTpe && post.location != null && post.address != null) {
                 addressView.text = post.address
                 locationLayout.setOnClickListener {
-                    val intent = Intent().apply {
+                    view.context.startActivity(Intent().apply {
                         action = Intent.ACTION_VIEW
                         data = Uri.parse("geo:${post.location.lat},${post.location.long}")
-                    }
-                    view.context.startActivity(intent)
+                    })
                 }
 
             } else {
@@ -219,6 +228,12 @@ class PostAdapter(
             postAdapter: PostAdapter
         ) {
             super.genericBind(post, position, postAdapter)
+            seeMoreBotton.setOnClickListener {
+                view.context.startActivity(Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = post.advLink
+                })
+            }
         }
     }
 

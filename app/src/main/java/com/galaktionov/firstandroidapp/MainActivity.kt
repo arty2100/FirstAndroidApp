@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
         ),
         Post(
             1L,
-            "Goolge",
-            "Use the best search engine!",
+            "Google",
+            "Try the best search engine!",
             1523496778000,
             true,
             5,

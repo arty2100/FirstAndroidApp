@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             2,
             0,
             1823,
-            videoUrl = "https://www.youtube.com/embed/-bvXmLR3Ozc",
+            videoUrl = "https://www.youtube.com/embed/WEkSYw3o5is",
             postTpe = Post.POST_TYPE.VIDEO
         ),
         Post(
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         Post(
             1L,
             "Facebook",
-            "Facebook post",
+            "Funny cats pt.2 ",
             1587567778000,
             false,
             16,
@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             3,
             null,
             null,
-            videoUrl = "https://www.youtube.com/embed/-bvXmLR3Ozc",
+            videoUrl = "https://www.youtube.com/embed/hY7m5jjJ9mM",
             postTpe = Post.POST_TYPE.VIDEO,
             companyImg = Uri.parse("https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512")
         )

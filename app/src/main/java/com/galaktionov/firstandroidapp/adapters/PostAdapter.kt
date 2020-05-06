@@ -35,12 +35,12 @@ import java.util.*
 
 class PostAdapter(
     val items: MutableList<Post>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<PostAdapter.GenericHolder>() {
 
     private val TYPE_ADV = 1
     private val TYPE_OTHER = 0
 
-    open class GenericAdapter(val view: View) : RecyclerView.ViewHolder(view) {
+    open class GenericHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val likeIcon = view.likeIcon
         val likeText = view.likeText
         val commentText = view.commentText
@@ -66,6 +66,13 @@ class PostAdapter(
                 company.text = author
                 sharedText.text = if (shares > 0) shares.toString() else ""
                 commentText.text = if (comments > 0) comments.toString() else ""
+
+                if (position == 0) {
+                    val layoutParams =
+                        view.layoutParams as RecyclerView.LayoutParams
+                    layoutParams.topMargin = 0
+                    view.layoutParams = layoutParams
+                }
                 manageLikeButton(this)
                 notInterested.setOnClickListener {
                     postAdapter.removeFromList(position)
@@ -220,7 +227,7 @@ class PostAdapter(
         }
     }
 
-    class AdvHolder(view: View) : GenericAdapter(view) {
+    class AdvHolder(view: View) : GenericHolder(view) {
 
         fun bind(
             post: Post,
@@ -238,7 +245,7 @@ class PostAdapter(
     }
 
 
-    class Holder(view: View) : GenericAdapter(view) {
+    class Holder(view: View) : GenericHolder(view) {
         fun bind(
             post: Post,
             position: Int,
@@ -265,7 +272,7 @@ class PostAdapter(
         notifyItemRangeChanged(position, items.size)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericHolder {
 
         return if (TYPE_ADV != viewType) Holder(parent.inflate(R.layout.post_detail, false))
         else AdvHolder(parent.inflate(R.layout.post_detail_adv, false))
@@ -275,7 +282,7 @@ class PostAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GenericHolder, position: Int) {
         if (TYPE_ADV != getItemViewType(position)) (holder as Holder).bind(
             items[position],
             position,
@@ -287,6 +294,10 @@ class PostAdapter(
     override fun getItemViewType(position: Int): Int {
         return if (Post.POST_TYPE.ADV == items[position].postTpe) TYPE_ADV else TYPE_OTHER
 
+    }
+
+    override fun onViewRecycled(holder: GenericHolder) {
+        super.onViewRecycled(holder)
     }
 }
 

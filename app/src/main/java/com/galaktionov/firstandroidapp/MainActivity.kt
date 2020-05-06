@@ -3,6 +3,7 @@ package com.galaktionov.firstandroidapp
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.galaktionov.firstandroidapp.adapters.PostAdapter
 import com.galaktionov.firstandroidapp.dto.Post
 import com.galaktionov.firstandroidapp.extensions.x
@@ -16,6 +17,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val list = prepareList()
         items.adapter = PostAdapter(list)
+        items.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 
     private fun prepareList(): MutableList<Post> = mutableListOf(
@@ -81,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             3,
             null,
             null,
-            videoUrl ="https://www.youtube.com/embed/-bvXmLR3Ozc",
+            videoUrl = "https://www.youtube.com/embed/-bvXmLR3Ozc",
             postTpe = Post.POST_TYPE.VIDEO,
             companyImg = Uri.parse("https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512")
         )

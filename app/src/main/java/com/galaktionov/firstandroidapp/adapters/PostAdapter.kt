@@ -40,32 +40,17 @@ class PostAdapter(
     private val TYPE_ADV = 1
     private val TYPE_OTHER = 0
 
-    open class GenericHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        val likeIcon = view.likeIcon
-        val likeText = view.likeText
-        val commentText = view.commentText
-        val sharedText = view.sharedText
-        val mainText = view.mainText
-        val company = view.company
-        val companyLogo = view.logoIcon
-        val notInterested = view.notInterested
-        val webView = view.webView
-        val addressView = view.addressView
-        val locationIcon = view.locationIcon
-        val locationLayout = view.addressView
-        val date = view.date
-        val seeMoreBotton = view.seeMoreButton
+    abstract class GenericHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        fun genericBind(
+        protected fun genericBind(
             post: Post,
-            position: Int,
-            postAdapter: PostAdapter
+            position: Int
         ) {
             with(post) {
-                mainText.text = content
-                company.text = author
-                sharedText.text = if (shares > 0) shares.toString() else ""
-                commentText.text = if (comments > 0) comments.toString() else ""
+                view.mainText.text = content
+                view.company.text = author
+                view.sharedText.text = if (shares > 0) shares.toString() else ""
+                view.commentText.text = if (comments > 0) comments.toString() else ""
 
                 if (position == 0) {
                     val layoutParams =
@@ -74,10 +59,8 @@ class PostAdapter(
                     view.layoutParams = layoutParams
                 }
                 manageLikeButton(this)
-                notInterested.setOnClickListener {
-                    postAdapter.removeFromList(position)
-                }
-                likeIcon.setOnClickListener {
+
+                view.likeIcon.setOnClickListener {
                     likedByMe = if (likedByMe) {
                         likes--
                         false
@@ -89,7 +72,7 @@ class PostAdapter(
                 }
                 Glide.with(view.context).load(companyImg ?: R.drawable.ic_android_48dp)
                     .transform(FitCenter(), RoundedCorners(10))
-                    .into(companyLogo)
+                    .into(view.logoIcon)
             }
         }
 
@@ -176,19 +159,19 @@ class PostAdapter(
         fun manageVideo(post: Post) {
 
             if (Post.POST_TYPE.VIDEO == post.postTpe && post.videoUrl != null) {
-                webView.webViewClient = object : WebViewClient() {
+                view.webView.webViewClient = object : WebViewClient() {
                     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                         return false
                     }
                 }
-                val webSettings: WebSettings = webView.settings
+                val webSettings: WebSettings = view.webView.settings
                 webSettings.javaScriptEnabled = true
                 webSettings.loadWithOverviewMode = true
                 webSettings.useWideViewPort = true
 
-                webView.loadUrl(post.videoUrl)
+                view.webView.loadUrl(post.videoUrl)
             } else {
-                webView.visibility = View.GONE
+                view.webView.visibility = View.GONE
             }
 
         }
@@ -196,24 +179,24 @@ class PostAdapter(
         fun manageLikeButton(post: Post) {
 
             if (post.likedByMe) {
-                likeIcon.setImageDrawable(view.context.getDrawable(R.drawable.ic_favorite_red_24dp))
-                likeText.setTextColor(view.context.resources.getColor(R.color.colorAccent))
+                view.likeIcon.setImageDrawable(view.context.getDrawable(R.drawable.ic_favorite_red_24dp))
+                view.likeText.setTextColor(view.context.resources.getColor(R.color.colorAccent))
             } else {
-                likeIcon.setImageDrawable(view.context.getDrawable(R.drawable.ic_favorite_black_24dp))
-                likeText.setTextColor(view.context.resources.getColor(android.R.color.black))
+                view.likeIcon.setImageDrawable(view.context.getDrawable(R.drawable.ic_favorite_black_24dp))
+                view.likeText.setTextColor(view.context.resources.getColor(android.R.color.black))
             }
 
             val anim = AnimationUtils.loadAnimation(view.context, R.anim.scale)
-            likeIcon.startAnimation(anim);
+            view.likeIcon.startAnimation(anim);
 
-            likeText.text = if (post.likes > 0) post.likes.toString() else ""
+            view.likeText.text = if (post.likes > 0) post.likes.toString() else ""
         }
 
         fun manageLocation(post: Post) {
 
             if (Post.POST_TYPE.EVENT == post.postTpe && post.location != null && post.address != null) {
-                addressView.text = post.address
-                locationLayout.setOnClickListener {
+                view.addressView.text = post.address
+                view.locationLayout.setOnClickListener {
                     view.context.startActivity(Intent().apply {
                         action = Intent.ACTION_VIEW
                         data = Uri.parse("geo:${post.location.lat},${post.location.long}")
@@ -221,8 +204,8 @@ class PostAdapter(
                 }
 
             } else {
-                locationIcon.visibility = View.GONE
-                addressView.visibility = View.GONE
+                view.locationIcon.visibility = View.GONE
+                view.addressView.visibility = View.GONE
             }
         }
     }
@@ -231,11 +214,10 @@ class PostAdapter(
 
         fun bind(
             post: Post,
-            position: Int,
-            postAdapter: PostAdapter
+            position: Int
         ) {
-            super.genericBind(post, position, postAdapter)
-            seeMoreBotton.setOnClickListener {
+            genericBind(post, position)
+            view.seeMoreButton.setOnClickListener {
                 view.context.startActivity(Intent().apply {
                     action = Intent.ACTION_VIEW
                     data = post.advLink
@@ -251,9 +233,9 @@ class PostAdapter(
             position: Int,
             postAdapter: PostAdapter
         ) {
-            super.genericBind(post, position, postAdapter)
+            genericBind(post, position)
             with(post) {
-                date.text =
+                view.date.text =
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) lastSeenApi26(created) else lastSeen(
                         created
                     )
@@ -288,7 +270,11 @@ class PostAdapter(
             position,
             this
         )
-        else (holder as AdvHolder).bind(items[position], position, this)
+        else (holder as AdvHolder).bind(items[position], position)
+
+        holder.view.notInterested.setOnClickListener {
+            removeFromList(position)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {

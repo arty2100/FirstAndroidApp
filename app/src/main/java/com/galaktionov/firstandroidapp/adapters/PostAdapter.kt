@@ -220,7 +220,7 @@ class PostAdapter(
             view.seeMoreButton.setOnClickListener {
                 view.context.startActivity(Intent().apply {
                     action = Intent.ACTION_VIEW
-                    data = post.advLink
+                    data = Uri.parse(post.advLink)
                 })
             }
         }

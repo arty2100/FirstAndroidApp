@@ -15,8 +15,8 @@ data class Post(
     val location: Location? = null,
     val videoUrl: String? = null,
     val postTpe: POST_TYPE,
-    val advLink: Uri? = null,
-    val companyImg : Uri? = null
+    val advLink: String? = null,
+    val companyImg : String? = null
 ) {
     enum class POST_TYPE {
         VIDEO, TEXT, REPLY, EVENT, ADV

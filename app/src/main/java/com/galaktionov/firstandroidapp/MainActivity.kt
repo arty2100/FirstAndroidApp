@@ -2,6 +2,7 @@ package com.galaktionov.firstandroidapp
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.galaktionov.firstandroidapp.adapters.PostAdapter
@@ -33,25 +34,32 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private fun prepareList() = launch {
 
-        val client = HttpClient {
-            install(JsonFeature) {
-                acceptContentTypes = listOf(
-                    ContentType.Text.Plain,
-                    ContentType.Application.Json
-                )
-                serializer = GsonSerializer()
-            }
-        }
-        val posts = withContext(Dispatchers.IO) {
-            client.get<MutableList<Post>>(posts_url)
-        }
-        val advPosts = withContext(Dispatchers.IO) {
-            client.get<MutableList<Post>>(adv_posts_url)
-        }
-        progress.visibility = View.GONE
-        val adapter = PostAdapter()
-        items.adapter = adapter
-        adapter.setItems(posts, advPosts)
+        try {
 
+
+            val client = HttpClient {
+                install(JsonFeature) {
+                    acceptContentTypes = listOf(
+                        ContentType.Text.Plain,
+                        ContentType.Application.Json
+                    )
+                    serializer = GsonSerializer()
+                }
+            }
+            val posts = withContext(Dispatchers.IO) {
+                client.get<MutableList<Post>>(posts_url)
+            }
+            val advPosts = withContext(Dispatchers.IO) {
+                client.get<MutableList<Post>>(adv_posts_url)
+            }
+            progress.visibility = View.GONE
+            val adapter = PostAdapter()
+            items.adapter = adapter
+            adapter.setItems(posts, advPosts)
+        } catch (e: Exception) {
+            AlertDialog.Builder(this@MainActivity)
+                .setTitle(title).setMessage(e.message).create().show()
+
+        }
     }
 }

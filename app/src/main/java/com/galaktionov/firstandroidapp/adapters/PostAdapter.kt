@@ -42,7 +42,7 @@ class PostAdapter(
         val size = posts.size
         var adpPostIndex = 0
         for (i in 0 until size) {
-            if (i % 3 == 0 && i > 0) {
+            if (i % 3 == 0 && i > 0 && adv_posts.getOrNull(adpPostIndex) != null) {
                 items.add(adv_posts[adpPostIndex])
                 adpPostIndex++
             }
@@ -234,7 +234,7 @@ class PostAdapter(
             view.seeMoreButton.setOnClickListener {
                 view.context.startActivity(Intent().apply {
                     action = Intent.ACTION_VIEW
-                    data = Uri.parse(post.advLink)
+                      data = Uri.parse(post.advLink)
                 })
             }
         }

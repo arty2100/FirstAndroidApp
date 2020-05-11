@@ -34,8 +34,22 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 class PostAdapter(
-    val items: MutableList<Post>
+
 ) : RecyclerView.Adapter<PostAdapter.GenericHolder>() {
+    val items: MutableList<Post> = emptyList<Post>().toMutableList()
+
+    fun setItems(posts: MutableList<Post>, adv_posts: MutableList<Post>) {
+        val size = posts.size
+        var adpPostIndex = 0
+        for (i in 0 until size) {
+            if (i % 3 == 0 && i > 0) {
+                items.add(adv_posts[adpPostIndex])
+                adpPostIndex++
+            }
+            items.add(posts[i])
+
+        }
+    }
 
     private val TYPE_ADV = 1
     private val TYPE_OTHER = 0

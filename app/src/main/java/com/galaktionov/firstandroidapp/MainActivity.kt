@@ -14,7 +14,8 @@ import io.ktor.http.ContentType
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 
-const val url = "https://raw.githubusercontent.com/arty2100/gson/master/posts.json"
+const val posts_url = "https://raw.githubusercontent.com/arty2100/gson/master/posts.json"
+const val adv_posts_url = "https://raw.githubusercontent.com/arty2100/gson/master/adv_posts.json"
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
@@ -41,11 +42,16 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                 serializer = GsonSerializer()
             }
         }
-        val list = withContext(Dispatchers.IO) {
-            client.get<MutableList<Post>>(url)
+        val posts = withContext(Dispatchers.IO) {
+            client.get<MutableList<Post>>(posts_url)
+        }
+        val advPosts = withContext(Dispatchers.IO) {
+            client.get<MutableList<Post>>(adv_posts_url)
         }
         progress.visibility = View.GONE
-        items.adapter = PostAdapter(list)
+        val adapter = PostAdapter()
+        items.adapter = adapter
+        adapter.setItems(posts, advPosts)
 
     }
 }

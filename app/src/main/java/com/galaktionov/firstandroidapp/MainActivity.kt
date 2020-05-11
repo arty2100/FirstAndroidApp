@@ -1,6 +1,7 @@
 package com.galaktionov.firstandroidapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.galaktionov.firstandroidapp.adapters.PostAdapter
@@ -20,8 +21,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val list = prepareList()
-//        items.adapter = PostAdapter(list)
+        prepareList()
         items.addItemDecoration(
             DividerItemDecoration(
                 this,
@@ -42,10 +42,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             }
         }
         val list = withContext(Dispatchers.IO) {
-
             client.get<MutableList<Post>>(url)
-
         }
+        progress.visibility = View.GONE
         items.adapter = PostAdapter(list)
 
     }
